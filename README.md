@@ -24,8 +24,8 @@
 </tr>
 
 <tr>
-  <td><strong>Nombre</strong></td>
-  <td><strong>DESKTOP-NNRSS51</strong></td>
+  <td>Nombre</td>
+  <td>DESKTOP-NNRSS51</td>
 </tr>
   
  <tr>

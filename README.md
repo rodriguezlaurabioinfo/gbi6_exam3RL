@@ -61,3 +61,59 @@
 </body>
 </html>
 
+# Programas y paquetes utilizados: 💻📦
+
+<table>
+<tr>
+  <td><strong>PROGRAMAS Y PAQUETES</strong></td>
+  <td><strong>VERSION</strong></td>
+</tr>
+
+<tr>
+  <td>BiocManager</td>
+  <td>3.16</td>
+</tr>
+  
+ <tr>
+  <td>ComplexHeatmap</td>
+  <td>2.15.1</td>
+</tr>
+
+<tr>
+  <td>tidyverse</td>
+  <td>2.0.0</td>
+</tr>
+
+<tr>
+  <td>ggpubr</td>
+  <td>0.6.0</td>
+</tr>
+
+ <tr>
+  <td>magrittr</td>
+  <td>2.0.3</td>
+</tr>
+  
+ <tr>
+  <td>ggplot2</td>
+  <td>3.4.1</td>
+</tr>
+
+ <tr>
+  <td>plotly</td>
+  <td>4.10.1</td>
+</tr> 
+
+<tr>
+  <td>palmerpenguins</td>
+  <td>0.1.1</td>
+</tr>
+
+<tr>
+  <td>ggpmisc</td>
+  <td>0.5.2</td>
+</tr>
+</table>
+
+</body>
+</html>

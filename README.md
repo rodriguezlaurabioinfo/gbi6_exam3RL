@@ -8,10 +8,10 @@
 
 # Datos del estudiante:
 - Nombre: Laura Rodriguez
-- Edad: 21 años
+- Edad: 22 años
 - Idioma: Español 
 - Fecha de nacimiento: 24/12/2000
-- Nacionalidad: cubana
+- Nacionalidad: Cubana
 
 # Propiedades de la Pc institucional: 💻 
 

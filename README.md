@@ -13,9 +13,8 @@
 - Fecha de nacimiento: 24/12/2000
 - Nacionalidad: Cubana
 
-# Propiedades de la Pc: 💻 
 
-<h1>Propiedades de la PC</h1>
+<h1>Propiedades de la PC 💻</h1>
 
 <table>
 <tr>

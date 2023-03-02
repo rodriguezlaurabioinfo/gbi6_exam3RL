@@ -13,7 +13,7 @@
 - Fecha de nacimiento: 24/12/2000
 - Nacionalidad: Cubana
 
-# Propiedades de la Pc institucional: 💻 
+# Propiedades de la Pc: 💻 
 
 <h1>Propiedades de la PC</h1>
 
@@ -24,20 +24,35 @@
 </tr>
 
 <tr>
+  <td><strong>Nombre</strong></td>
+  <td><strong>DESKTOP-NNRSS51</strong></td>
+</tr>
+  
+ <tr>
   <td>Windows</td>
-  <td>10 pro</td>
+  <td>11 pro</td>
 </tr>
 
 <tr>
   <td>Procesador</td>
-  <td>Intel (R) Core(TM) i7-7700 CPU @ 3.60 GHz</td>
+  <td>Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz   1.19 GHz</td>
 </tr>
 
 <tr>
   <td>Memoria instalada (RAM)</td>
-  <td>16,0 GB (15,9 GB utilizable)</td>
+  <td>4,00 GB (3,70 GB utilizable)</td>
 </tr>
 
+ <tr>
+  <td>Id del dispositivo (RAM)</td>
+  <td>C839C7EF-7E10-4140-9B2A-11EACB86721B</td>
+</tr>
+  
+ <tr>
+  <td>Id del producto (RAM)</td>
+  <td>00330-80000-00000-AA879</td>
+</tr>
+  
 <tr>
   <td>Tipo de sistema</td>
   <td>Sistema operativo de 64 bits, procesador x64</td>

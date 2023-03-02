@@ -12,7 +12,6 @@
 - Idioma: Español 
 - Fecha de nacimiento: 24/12/2000
 - Nacionalidad: cubana
-# Propiedades de la Pc institucional: 💻 
 
 # Propiedades de la Pc institucional: 💻 
 

@@ -1,6 +1,6 @@
+
 ---
 title: "Bioinformática- GBI6"
-subtitle: "EXAMEN FINAL - 2022II"
 author: "APELLIDO, Nombre"
 date: "`r Sys.Date()`"
 output:
@@ -12,6 +12,10 @@ output:
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+subtitle: "EXAMEN FINAL - 2022II"
 ---
 
 ```{r setup, include=FALSE}
@@ -148,6 +152,8 @@ ggarrange(p3, ggarrange(p1, p2, labels =c("b", "c"), nrow=2),
 
 **INTERPRETACIÓN**
 
+## Grafica a) muestra la relación entre el ancho y largo del pico de los pingüinos por especie e isla. Cada panel representa una combinación de especie e isla y muestra un diagrama de dispersión con una línea de regresión lineal ajustada. La línea de regresión lineal muestra la tendencia general en los datos y puede ayudar a entender cómo el ancho del pico se relaciona con el largo del pico para cada combinación de especie e isla. Figura c: es un diagrama de dispersión con barras de error para la longitud del pico de los pingüinos por especie y sexo. Este gráfico permite comparar la longitud media del pico entre las diferentes especies de pingüinos y entre machos y hembras dentro de cada especie. Las barras de error muestran el intervalo de confianza del 95% para la media. Los puntos aleatorios muestran la distribución subyacente de los datos y permiten ver si hay valores atípicos o si la distribución es simétrica. Por ejemplo, se puede observar que en promedio los pingüinos Gentoo tienen picos más largos que las otras dos especies. También se puede observar que dentro de cada especie, los machos tienden a tener picos más largos que las hembras. Figura b) es un boxplot para el ancho del pico de los pingüinos por especie. Un diagrama de caja muestra la distribución de un conjunto de datos a lo largo de un eje numérico. Cada caja representa el rango intercuartílico (IQR) de los datos, que es la distancia entre el primer y tercer cuartil. La línea dentro de la caja representa la mediana y las líneas que se extienden desde la caja (llamadas bigotes) representan el rango de los datos dentro de 1.5 veces el IQR.  El rango intercuartílico (IQR) es una medida de la dispersión de un conjunto de datos. Se calcula como la diferencia entre el tercer cuartil (Q3) y el primer cuartil (Q1). El primer cuartil es el valor que separa el 25% inferior de los datos y el tercer cuartil es el valor que separa el 75% inferior de los datos. La mediana es el valor que divide un conjunto de datos en dos partes iguales. Es decir, la mitad de los datos son menores o iguales a la mediana y la otra mitad son mayores o iguales a la mediana. Los valores atípicos son valores que se desvían significativamente del resto de los datos. En un diagrama de caja, los valores atípicos se representan por puntos fuera de los bigotes. Los bigotes se extienden desde la caja hasta el valor más cercano dentro de 1.5 veces el IQR. 
+
 ### [3.0 puntos] 1.2. Genere dos gráficas `p4` y `p5`donde: 
 
 - `p4` es una regresión de `x: body_mass_g` y `y: flipper_length_mm`, que tiene inserto la ecuación de la regresión y el $R^2$. Asimismo tiene una coloración por sexo, y una separación por sexo e isla. 
@@ -169,11 +175,45 @@ cat(paste0('<center><img src="', img4,'" width="200" height="200" alt=""></cente
 
 ```{r p1.1, echo=TRUE, warning=FALSE, fig.height=8}
 # Escriba aquí su código
+library(ggcorrplot)
+library(gridExtra)
 
+library(palmerpenguins)
+
+
+data <- na.omit(penguins)
+
+p4 <- ggplot(data, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~sex + island) +
+  stat_poly_eq(formula = y ~ x,
+               aes(label = paste(..eq.label.., ..rr.label.., sep = "~")),
+               parse = TRUE,
+               label.x.npc = "right",
+               label.y.npc = "top")
+
+p4
+
+corr_data <- data[, c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g")]
+
+corr_matrix <- cor(corr_data)
+
+p5 <- ggcorrplot(corr_matrix,
+                 lab = TRUE,
+                 type = "lower",
+                 outline.col = "white",
+                 ggtheme = theme_gray())
+
+p5
+
+
+grid.arrange(p4, p5, ncol = 2)
 ```
 
 **INTERPRETACIÓN**
 
+##Grafica 4. Este gráfico muestra la relación entre la masa corporal y la longitud de las aletas de los pingüinos. Los puntos representan a los pingüinos individuales y están coloreados según su sexo. Además, el gráfico está dividido en facetas por sexo e isla. La línea de regresión muestra la tendencia general en los datos: a medida que aumenta la masa corporal de un pingüino, también aumenta su longitud de aleta. La ecuación de regresión y el coeficiente R cuadrado te permiten cuantificar esta relación. Grafica 5. Este gráfico muestra la correlación entre cuatro características importantes de los pingüinos: la longitud del pico, la profundidad del pico, la longitud de las aletas y la masa corporal. Cada celda del gráfico representa la correlación entre dos de estas características. Los valores en el gráfico representan la correlación entre dos características de los pingüinos. La correlación mide la relación lineal entre dos variables. Un valor de correlación cercano a 1 indica una relación lineal positiva fuerte (cuando una variable aumenta, también lo hace la otra), mientras que un valor cercano a -1 indica una relación lineal negativa fuerte (cuando una variable aumenta, la otra disminuye). Un valor cercano a 0 indica que no hay una relación lineal clara entre las dos variables. Por ejemplo, si el valor de correlación entre la longitud del pico y la masa corporal es 0.8, esto indica que hay una relación lineal positiva fuerte entre estas dos características: a medida que aumenta la longitud del pico de un pingüino, también aumenta su masa corporal. Por otro lado, si el valor de correlación entre la profundidad del pico y la longitud de las aletas es -0.6, esto indica que hay una relación lineal negativa moderada entre estas dos características: a medida que aumenta la profundidad del pico de un pingüino, disminuye su longitud de aleta.
 
 # [4.0 PUNTOS] 2. MAPAS DE CALOR DE EXPRESIÓN GÉNICA
 
@@ -260,7 +300,13 @@ Aquí se carga los datos `EMTAB6141.rdata` que se requiere para este ejercicio. 
 
 ```{r}
 # Cargue aquí sus datos
+mat_url <- "https://raw.githubusercontent.com/kevinblighe/E-MTAB-6141/master/mat.tsv"
+metadata_url <- "https://raw.githubusercontent.com/kevinblighe/E-MTAB-6141/master/metadata.tsv"
+sig_genes_url <- "https://raw.githubusercontent.com/kevinblighe/E-MTAB-6141/master/sig_genes.list"
 
+mat <- read.table(url(mat_url), sep = "\t", header = TRUE)
+metadata <- read.table(url(metadata_url), sep = "\t", header = TRUE)
+sig_genes <- readLines(url(sig_genes_url))
 ```
 
 En la siguiente celda de código, realice la réplica del mapa de calor que se encuentra a la izquierda (`hmap1`) de esta figura: 
@@ -270,7 +316,30 @@ img5 = "https://github.com/kevinblighe/E-MTAB-6141/raw/master/README_files/figur
 cat(paste0('<center><img src="', img5,'" width="700" height="700" alt=""></center>')) 
 ```
 ```{r}
-# Escriba aquí sus códigos
+load('data/EMTAB6141.Rdata') # carga la tabla de expression
+load('data/metadata.Rdata')
+str(expression)
+expr_dist <- expression %>% select(-Gene, -var) %>% 
+  t() %>% 
+  dist() %>% 
+  as.matrix() %>% data.frame() 
+dim(expr_dist)
+Heatmap(expr_dist)
+metadata_heatmap <- metadata  %>% 
+  mutate(sample = paste0('X', sample)) %>% # nombres de muestras
+  filter(sample %in% colnames(expr_dist)) %>% 
+  dplyr::select(sample, treatment_hours, serum) %>% 
+  mutate(sample=factor(sample, levels=colnames(expr_dist))) %>% 
+  arrange(sample) %>%  unique() 
+
+ha_column = HeatmapAnnotation(df = data.frame(Tiempo = metadata_heatmap$treatment_hours,
+                                              Suero = metadata_heatmap$serum), 
+                              col = list(Serum = c("HS" =  magma(20)[2], "HIHS" = magma(20)[3]),
+                                         Time = c("24" = magma(20)[14], "48" = magma(20)[12])))
+
+# Mapa de calor anotado en la parte superior
+Heatmap(expr_dist,  col=viridis(10), 
+        name = 'Distancias', top_annotation = ha_column, )
 ```
 
 **INTERPRETACIÓN:**
